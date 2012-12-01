@@ -1,74 +1,193 @@
-<!DOCTYPE html>
 <html>
+<head>
+<title>ingress model test</title>
+<script src="https://raw.github.com/mrdoob/three.js/master/build/three.js"></script>    
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Ingress-webgl : " />
+<style>
+body {
+  overflow	: hidden;
+  padding		: 0;
+  margin		: 0;
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  color		: #222;
+  background-color: #000;
+  font-family	: arial;
+  font-size	: 100%;
+}
 
-    <title>Ingress-webgl</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/russenreaktor/ingress-webgl">View on GitHub</a>
-
-          <h1 id="project_title">Ingress-webgl</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/russenreaktor/ingress-webgl/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/russenreaktor/ingress-webgl/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Ingress-webgl maintained by <a href="https://github.com/russenreaktor">russenreaktor</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
+#g-plusone{
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  background: white;
+  padding: 7px;
+  border-radius: 4px 0 0 0;
+}
     
+</style>
+</head>
+<body>
 
-  </body>
+
+
+<script> 
+    
+var scene = new THREE.Scene(); 
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);  
+var renderer = new THREE.WebGLRenderer({
+			antialias		: true,	// to get smoother output
+		preserveDrawingBuffer	: true	// to allow screenshot
+	});
+// renderer.setClearColorHex( 0xBBBBBB, 1 );
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowCameraNear = 3;
+// renderer.shadowCameraFar = camera.far;
+renderer.shadowCameraFov = 50;
+renderer.shadowMapBias = 0.0039;
+renderer.shadowMapDarkness = 0.5;
+//renderer.shadowMapWidth = SHADOW_MAP_WIDTH;
+//renderer.shadowMapHeight = SHADOW_MAP_HEIGHT;
+renderer.shadowMapEnabled = true;
+renderer.shadowMapSoft = true;
+
+document.body.appendChild(renderer.domElement);
+
+/*
+var geometry = new THREE.CubeGeometry(1,1,1); 
+var material = new THREE.MeshBasicMaterial({color: 0x00ff00}); 
+var cube = new THREE.Mesh(geometry, material); 
+scene.add(cube);  
+*/
+camera.position.x = 0;
+camera.position.y = 0;
+camera.position.z = 80;
+
+
+// - you will most likely replace this part by your own
+var light	= new THREE.AmbientLight( 0xffffff );
+scene.add( light );
+// var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+// light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+// scene.add( light );
+// var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+// light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+// scene.add( light );
+// var light	= new THREE.PointLight( Math.random() * 0xffffff );
+// light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 ).normalize().multiplyScalar(1.2);
+// scene.add( light );
+// var light	= new THREE.PointLight( Math.random() * 0xffffff );
+// light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 ).normalize().multiplyScalar(1.2);
+// scene.add( light )
+
+//var url = 'compass.js'; //'compassTextureOn.png'
+var objects = [
+ {obj:'compass.obj.js', texture: 'compassTextureOn.png'}
+,{obj:'emp_ring.obj.js', texture: 'emp_ring.png'}
+,{obj:'resonatorResourceUnit.obj.js', texture: 'resonatorResourceUnitTexture.png'}
+
+,{obj:'shield.obj.js', texture: 'shieldTexture.png'}
+,{obj:'singleResonator.obj.js', texture: 'resonatorResourceUnitTexture.png'}
+
+,{obj:'texturedPortal.obj.js', texture: 'portalTexture_ALIENS.png'}
+,{obj:'texturedResonator.obj.js', texture: 'resonatorTexture.png'}
+
+,{obj:'texturedResonatorRing.obj.js', texture: 'resonatorResourceUnitTexture.png'}
+,{obj:'texturedResonatorXM.obj.js', texture: 'resonatorXMTexture.png'}
+
+];
+
+
+var group = null;
+group = new THREE.Object3D();//create an empty container
+
+loadModel(objects[5]);
+// loadModel(objects[8]);
+// loadModel(objects[7]);
+
+  
+
+function loadModel(objectToRender) {
+//var url = 'texturedPortal.obj.js';
+
+// var texture = THREE.ImageUtils.loadTexture('portalTexture_ALIENS.png', {}, function() {
+//     renderer.render(scene)
+// });
+      
+var texture = THREE.ImageUtils.loadTexture(objectToRender.texture);//'portalTexture_ALIENS.png'
+
+// var material = new THREE.MeshLambertMaterial( {color: 0xcccccc});
+//var material = new THREE.MeshBasicMaterial({map: texture});
+
+
+var material = new THREE.MeshBasicMaterial({
+        //color: 0xa7f1ff,
+        //opacity: 0.6,
+        //wireframe: true,
+        map: texture,
+        transparent: true,
+        blending: THREE.AdditiveAlpha        
+        });
+
+material.depthTest = false;
+
+loader = new THREE.JSONLoader(); 
+
+var compass = null;
+loader.load(objectToRender.obj, function(geometry) {
+    //compass = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( {color: 0xcccccc}));
+    compass = new THREE.Mesh(geometry, material);
+    
+    compass.scale.set(10, 10, 10);
+    compass.position.y = 0;
+    compass.position.x = 0;
+    //compass.rotation.x = 0.5;
+    compass.doubleSided = true;
+    
+    //group = new THREE.Object3D();//create an empty container
+    group.add( compass );//add a mesh with geometry to it
+    scene.add( group );//when done, add the group to the scene
+
+
+});
+
+
+  
+
+}
+
+
+function render() { 
+    requestAnimationFrame(render); 
+    if (group) {
+      //compass.rotation.x += 0.01; 
+      //compass.rotation.y += 0.01;
+      group.rotation.y += 0.01;
+        
+    }
+
+  renderer.render(scene, camera); 
+    
+} 
+      
+render();
+    
+</script>
+
+
+<div id="g-plusone">
+<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+</div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+</body>
 </html>
+	
